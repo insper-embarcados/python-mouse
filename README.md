@@ -2,6 +2,8 @@
 
 Este software é um exemplo de como controlar o mouse/teclado via Python recebendo dados de uma UART.
 
+![](diagram.png)
+
 A ideia aqui é emular um teclado/mouse via comandos recebidos de uma UART (`main.py`) que faz a leitura da porta UART e processa os dados para movimentar o mouse. Para que isso funcione corretamente, será necessário enviar os dados no seguinte formato:
 
 ```
