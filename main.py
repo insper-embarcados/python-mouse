@@ -125,7 +125,7 @@ def desconectar():
 def criar_janela():
     root = tk.Tk()
     root.title("Controle de Mouse")
-    root.geometry("400x270")
+    root.geometry("400x300")
     root.resizable(False, False)
 
     dark_bg = "#2e2e2e"
@@ -213,6 +213,24 @@ def criar_janela():
         command=encerrar
     )
     botao_desconectar.pack(side="left")
+
+    # --- Checkbox FAILSAFE ---
+    failsafe_var = tk.BooleanVar(value=True)  # Ativo por padrão
+
+    def toggle_failsafe():
+        pyautogui.FAILSAFE = failsafe_var.get()
+
+    tk.Checkbutton(
+        frame_principal,
+        text="Failsafe (mover mouse ao canto encerra)",
+        variable=failsafe_var,
+        command=toggle_failsafe,
+        bg=dark_bg, fg="#ffb74d",
+        selectcolor=dark_bg,
+        activebackground=dark_bg,
+        activeforeground="#ffb74d",
+        font=("Segoe UI", 9),
+    ).pack(pady=(0, 4))
 
     # --- Footer ---
     footer_frame = tk.Frame(root, bg=dark_bg)
