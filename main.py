@@ -2,10 +2,29 @@
 
 import sys
 import glob
+import os
 import signal
 import threading
 import serial
 import serial.tools.list_ports
+
+
+def verificar_sessao_x11():
+    """Encerra com uma mensagem clara se o programa for iniciado no Wayland."""
+    session_type = os.environ.get("XDG_SESSION_TYPE", "").lower()
+    wayland_display = os.environ.get("WAYLAND_DISPLAY")
+
+    if session_type == "wayland" or wayland_display:
+        print(
+            "Erro: este programa usa pyautogui e deve ser executado em uma sessão X11.\n"
+            "A sessão atual é Wayland. Entre em uma sessão X11 e execute novamente.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+
+verificar_sessao_x11()
+
 import pyautogui
 pyautogui.PAUSE = 0  # Remove delay entre ações
 import tkinter as tk
